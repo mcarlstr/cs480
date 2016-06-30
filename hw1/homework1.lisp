@@ -36,8 +36,8 @@
   (let ((counter 0)) 
   (if (null lis) 0 
     (if (eq (first lis) 'a) 
-      (setq counter (+ 1 (countLetter (rest lis)))) 
-      (countLetter (rest lis))) )))
+      (setq counter (+ 1 (recursiveCountLetter (rest lis)))) 
+      (recursiveCountLetter (rest lis))) )))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -55,7 +55,7 @@
 ;;       removed from the same list that gets the + operator applied to it
 ;;       The working version is:
 
-(defun summit (lst) 
+(defun summit1 (lst) 
   (setq lst (remove nil lst))
     (apply #'+ lst))
 
@@ -71,11 +71,44 @@
 ;;       doesn't call the summit function again. 
 ;; A corrected version can be seen below:
 
-(defun summit (lst) 
+(defun summit2 (lst) 
   (let ((x (car lst))) 
   (progn (if (null lst) 
     0 
     (if (null x) 
       (summit (cdr lst)) 
       (+ x (summit (cdr lst))))))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;3. (3p) Suppose the function pos+ takes a list and returns a list of each
+;;   element plus its position:
+;;        > (pos+ '(7 5 1 4))
+;;        (7 6 3 7)
+;;Define this function using (a) recursion (b) iteration (c) mapcar
+;;(defun pos+ (lst) (if (null lst) 0 (+ ) ))
+
+;;(b) iteration
+(defun test (lst) 
+  (let ((counter 0)) 
+  (loop for x in lst do 
+    (setf (nth counter lst) (+ x counter)) (setq counter (+ counter 1)))) 
+    (princ lst)
+)
+
+;;4. (3p) Define a function f that takes one numeric argument, and returns the
+;;   greatest argument passed to it so far:
+;;        >(f 5)
+;;        5
+;;        >(f 2)
+;;        5
+;;        >(f 10)
+;;        10
+(let ((max 0)) 
+(defun f (number) 
+  (if (> number max) 
+    (setq max number)) 
+    max
+)
+)
 
