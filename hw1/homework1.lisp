@@ -87,7 +87,6 @@
 ;;        > (pos+ '(7 5 1 4))
 ;;        (7 6 3 7)
 ;;Define this function using (a) recursion (b) iteration (c) mapcar
-;;(defun pos+ (lst) (if (null lst) 0 (+ ) ))
 
 ;; (a) recursive
 (defun pos+  (lst &optional (counter 0) ) 
@@ -106,8 +105,11 @@
 )
 
 ;; (c) mapcar
-(defun pos+ (lst) (let ((applist () )) (loop for x from 1 to (length lst) do 
-	(setq applist (append applist (list x)) ))  (princ applist)  ))
+(defun pos+ (lst) 
+  (let ((applist () )) 
+    (loop for x from 0 to (length lst) do 
+      (setq applist (append applist (list x)) ))  
+        (mapcar #'+ lst applist)  ))
 
 ;;4. (3p) Define a function f that takes one numeric argument, and returns the
 ;;   greatest argument passed to it so far:
