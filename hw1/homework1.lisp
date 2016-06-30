@@ -30,3 +30,18 @@
     (princ count)
   ) 
 )
+
+
+
+
+;;(let ((counter 0)) 
+;;(defun countLetterperm (lis) 
+;;  (if (null lis) (setf counter nil) 
+;;    (if (eq (first lis) 'a) (progn (countLetter (rest lis)) (setq counter (+ counter 1))) (countLetter (rest lis))) )))
+
+(defun recursiveCountLetter (lis) 
+  (let ((counter 0)) 
+  (if (null lis) 0 
+    (if (eq (first lis) 'a) 
+      (setq counter (+ 1 (countLetter (rest lis)))) 
+      (countLetter (rest lis))) )))
