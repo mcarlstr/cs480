@@ -18,6 +18,7 @@
       )
     )
     (princ ".")
+  t
 )
 ;; (b) takes a list and returns the number of times the symbol a
 ;;       occurs in it.;;    
@@ -88,13 +89,25 @@
 ;;Define this function using (a) recursion (b) iteration (c) mapcar
 ;;(defun pos+ (lst) (if (null lst) 0 (+ ) ))
 
+;; (a) recursive
+(defun pos+  (lst &optional (counter 0) ) 
+  (if (eq (length lst)  counter) 
+    lst  
+    (progn (setf (nth counter lst) 
+      (+ counter (nth counter lst)) ) 
+        (pos+ lst (+ counter 1))) ))
+
 ;;(b) iteration
-(defun test (lst) 
+(defun pos+_iterative (lst) 
   (let ((counter 0)) 
   (loop for x in lst do 
     (setf (nth counter lst) (+ x counter)) (setq counter (+ counter 1)))) 
     (princ lst)
 )
+
+;; (c) mapcar
+(defun pos+ (lst) (let ((applist () )) (loop for x from 1 to (length lst) do 
+	(setq applist (append applist (list x)) ))  (princ applist)  ))
 
 ;;4. (3p) Define a function f that takes one numeric argument, and returns the
 ;;   greatest argument passed to it so far:
