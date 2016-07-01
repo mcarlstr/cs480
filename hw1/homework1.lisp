@@ -183,6 +183,10 @@
   numberVal ) 
 )
 
-;; right one?
-(defun conv16 (lst &optional (value 0)) (if (eq 1 (length lst)) (+ value (getNumber (nth 0 lst))) 
-     (progn (setq value (+ value (getNumber (first lst) ) ) ) (setq value (* value 16)) (conv16 (rest lst) value) ) ) )
+(defun conv16 (lst &optional (value 0)) 
+  (if (eq 1 (length lst)) 
+    (+ value (getNumber (nth 0 lst))) 
+    (progn (setq value (+ value (getNumber (first lst) ) ) ) 
+      (setq value (* value 16)) (conv16 (rest lst) value) ) 
+  )
+)
