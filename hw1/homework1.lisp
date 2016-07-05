@@ -1,3 +1,167 @@
+;;0. (3p extra credit) Write a wrapper function that executes all your
+;;    code with sufficent examples (at least 5 per function). 
+
+(defun wrapperFunction ()
+  ;; 1a iterative
+  (iterativeDotGenerator 0)  
+  (format t "~%") 
+  (iterativeDotGenerator 1)  
+  (format t "~%") 
+  (iterativeDotGenerator 2)  
+  (format t "~%") 
+  (iterativeDotGenerator 3)  
+  (format t "~%") 
+  (iterativeDotGenerator 4)  
+  (format t "~%")
+
+  (format t "-------------------------------------------~%")
+
+  ;; 1a recursive
+  (recursiveDotGenerator 0)  
+  (format t "~%") 
+  (recursiveDotGenerator 1)  
+  (format t "~%") 
+  (recursiveDotGenerator 2)  
+  (format t "~%") 
+  (recursiveDotGenerator 3)  
+  (format t "~%") 
+  (recursiveDotGenerator 4)  
+  (format t "~%")
+  
+  (format t "-------------------------------------------~%")
+
+  ;; 1b iterative
+  (let ((a '(a b c d a)) (b '(a a a a a) ) (c '() )  (d '(k) ) (e '(a b c a a a c b a)))
+    (iterativeLetterCount a)
+    (format t "~%")
+    (iterativeLetterCount b)
+    (format t "~%")
+    (iterativeLetterCount c)
+    (format t "~%")
+    (iterativeLetterCount d)
+    (format t "~%")
+    (iterativeLetterCount e)
+    (format t "~%")
+  )
+
+  (format t "-------------------------------------------~%")
+
+    ;; 1b recursive
+    (let ((a '(a b c a))) 
+      (princ (recursiveCountLetter a) ) )
+    (format t "~%")
+    (let ((b '(a a a a a)))
+      (princ (recursiveCountLetter b) ) )
+    (format t "~%")
+    (let ((c '()))
+      (princ (recursiveCountLetter c) ) )
+    (format t "~%")
+    (let ((d '(k t y u i o)))
+      (princ (recursiveCountLetter d) ) )
+    (format t "~%")
+    (let ((e '(a b c a a a c b a) ))
+      (princ (recursiveCountLetter e) ) )
+    (format t "~%")
+
+  (format t "-------------------------------------------~%")
+
+  ;; 2a
+  (princ (summit1 '(1 2 3 4 5))) ;; 15     
+  (format t "~%")
+  (princ (summit1 '(0))) ;; 0     
+  (format t "~%")
+  (princ (summit1 '())) ;; 0  
+  (format t "~%")
+  (princ (summit1 '(1))) ;; 1    
+  (format t "~%")
+  (princ (summit1 '(3 3 3 3 3))) ;; 15     
+  (format t "~%")
+
+(format t "-------------------------------------------~%")
+
+  ;; 2b
+  (princ (summit2 '(1 2 3 4 5))) ;; 15     
+  (format t "~%")
+  (princ (summit2 '(0))) ;; 0     
+  (format t "~%")
+  (princ (summit2 '())) ;; 0  
+  (format t "~%")
+  (princ (summit2 '(1))) ;; 1    
+  (format t "~%")
+  (princ (summit2 '(3 3 3 3 3))) ;; 15     
+  (format t "~%")
+
+  (format t "-------------------------------------------~%")
+  
+  ;; number three modifies actual data
+  ;; 3a
+  (princ (pos_rec+ '(1 2 3 4 5))) 
+  (format t "~%") 
+  (princ (pos_rec+ '(5 4 3 2 1))) 
+  (format t "~%")
+  (princ (pos_rec+ '(1 1 1 1 1 1 1 1))) 
+  (format t "~%")
+  (princ (pos_rec+ '()) )
+  (format t "~%")
+  (princ(pos_rec+ '(1 0 -1 -2))) 
+  (format t "~%")
+
+  (format t "-------------------------------------------~%")
+
+  ;; 3b
+  (let ((a '(1 2 3 4)))
+    (pos+_iterative a)) 
+  (format t "~%")
+  (let ((b '(5 4 3 2 1 0))) 
+    (pos+_iterative b)) 
+  (format t "~%")
+  (let ((c '(1 1 1 1)))
+    (pos+_iterative c)) 
+  (format t "~%")
+  (let ((d '(0 0 0 0 0 0)))
+    (pos+_iterative d) )
+  (format t "~%")
+  (let ((e '(9 5 7 1)))
+    (pos+_iterative e)) 
+  (format t "~%")
+
+  (format t "-------------------------------------------~%")
+
+  (princ (pos+_mapcar '( 1 2 5 6)))  
+  (format t "~%")
+  (princ (pos+_mapcar '( 1 0 10 10)))  
+  (format t "~%")
+  (princ (pos+_mapcar '( 10 9 8 7 6)))  
+  (format t "~%")
+  (princ (pos+_mapcar '( 2 2 2 2 2 2 2)))  
+  (format t "~%")
+  (princ (pos+_mapcar '( 0 )))  
+  (format t "~%")
+
+  (format t "-------------------------------------------~%")
+
+  ;; 4
+  (princ (f 0)) 
+  (format t "~%")
+  (princ (f 2)) 
+  (format t "~%")
+  (princ (f 3)) 
+  (format t "~%")
+  (princ (f 10)) 
+  (format t "~%")
+  (princ (f 5)) 
+  (format t "~%")
+  (princ (f 10000)) 
+  (format t "~%")
+  (princ (f 4)) 
+  (format t "~%")
+
+  (format t "-------------------------------------------~%")
+
+  (format t "-------------------------------------------~%")
+
+  (format t "-------------------------------------------~%")
+)
 
 ;;1. (4p) Give iterative and recursive definitions of a function that
 
@@ -6,18 +170,18 @@
   (loop
     for m from 1 to x
       do (princ ".")
-  ) 
+  )
 )
 
 (defun recursiveDotGenerator (x)
-    (if (= x 1)
+    (if  (= x 0)
       ;; base case just return 1
       1
-      (
-        recursiveDotGenerator (- x 1) 
+      (progn 
+        (recursiveDotGenerator (- x 1))
+        (princ ".") 
       )
     )
-    (princ ".")
   t
 )
 ;; (b) takes a list and returns the number of times the symbol a
@@ -33,12 +197,18 @@
   ) 
 )
 
+;;(defun recursiveCountLetter (lis) 
+;;  (let ((counter 0)) 
+;;  (if (null lis) 0 
+;;    (if (eq (first lis) 'a) 
+;;      (setq counter (+ 1 (recursiveCountLetter (rest lis)))) 
+;;      (recursiveCountLetter (rest lis))) ) ))
 (defun recursiveCountLetter (lis) 
   (let ((counter 0)) 
   (if (null lis) 0 
     (if (eq (first lis) 'a) 
-      (setq counter (+ 1 (recursiveCountLetter (rest lis)))) 
-      (recursiveCountLetter (rest lis))) )))
+      (progn (setq counter (+ 1 (recursiveCountLetter (rest lis)))) counter) 
+      (progn (setq counter (recursiveCountLetter (rest lis))) counter) ) )))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
