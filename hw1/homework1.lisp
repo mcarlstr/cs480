@@ -77,8 +77,8 @@
   (progn (if (null lst) 
     0 
     (if (null x) 
-      (summit (cdr lst)) 
-      (+ x (summit (cdr lst))))))))
+      (summit2 (cdr lst)) 
+      (+ x (summit2 (cdr lst))))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -89,12 +89,12 @@
 ;;Define this function using (a) recursion (b) iteration (c) mapcar
 
 ;; (a) recursive
-(defun pos+  (lst &optional (counter 0) ) 
+(defun pos_rec+  (lst &optional (counter 0) ) 
   (if (eq (length lst)  counter) 
     lst  
     (progn (setf (nth counter lst) 
       (+ counter (nth counter lst)) ) 
-        (pos+ lst (+ counter 1))) ))
+        (pos_rec+ lst (+ counter 1))) ))
 
 ;;(b) iteration
 (defun pos+_iterative (lst) 
@@ -105,7 +105,7 @@
 )
 
 ;; (c) mapcar
-(defun pos_mapcar+ (lst) 
+(defun pos+_mapcar (lst) 
   (let ((applist () )) 
     (loop for x from 0 to (length lst) do 
       (setq applist (append applist (list x)) ))  
@@ -138,10 +138,26 @@
 ;;    lookup, that takes a prefix of an exploded symbol (e.g., (s e t))
 ;;    and a dictionary and returns the list of all items in the
 ;;    dictionary that match the prefix. 
-;;(defun lookup (pre dict) () )
-;;(defun lookup (pre dict) () )
-;;  (defun extractPrefix (pre element) (loop for x in element for 0 to (length pre) do (princ x )) )
 
+;; this is a last ditch effort since it uses the static variable and cheets a little
+;;(let ((returnList () )) (defun lookup (pre dict) (setq returnList () ) (if (null dict) 0  
+;;    (progn (lookup pre (rest dict)) (if (equal pre (extractprefix (first dict) (length pre ) ) ) 
+;;      (setf returnList (append (list (first dict)) returnList)) )  ) ) ) )
+
+
+(defun lookup (pre dict) 
+  (let ((returnList () )) 
+  (if (null dict) returnList  
+    (if (equal pre (extractprefix (first dict) (length pre) ) ) 
+      (progn (setf returnList (append (lookup pre (rest dict)) (list (first dict)) ) )  returnList ) 
+      (progn (setf returnList (lookup pre (rest dict))) returnList) 
+    )
+  )
+  )
+)
+ 					      
+(defun extractPrefix (element length) (let ((pre () )) 
+  (loop for x from 0 to (- length 1) do (setq pre (append pre (list (nth x element)))) ) pre))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -152,10 +168,41 @@
     
 ;;    > (occurrences '(a b a d a c d c a))
 ;;    ((A 4) (C 2) (D 2) (B 1))
-(defun occurrences1 (lst) (let ((count 0) (appList () ))
-    (loop for x in lst do (if (eq (first lst) x ) (setq count (+ count 1) ) ) ) 
-(setq appList (append appList (list (first lst) count)) ) (setq lst (remove (first lst) lst) ) 
-(setq count 0) (princ applist) (princ count) ) )
+(defun occurrences (lst) 
+  (let ((count 0) (appList () ))
+    (loop while (not (null lst) ) do 
+      (loop for x in lst do 
+        (if (eql (first lst) x ) 
+          (setq count (+ count 1) ) ))
+        (setq appList (append appList (list (list (first lst) count)) ) ) 
+        (setq lst (remove (first lst) lst) ) 
+        (setq count 0)
+    ) 
+    (sort appList #'(lambda (x y) (> (second x) (second y) ) ) )
+  )
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;7. Find-fun (3p):
+;;    Write a lisp function find-fun that takes a dictionary (a list of exploded words) 
+;;    and returns all words that contain (f u n) as a sublist.
+
+;;    > (find-fun '((d e f u n) (h e l l o) (s e t f) (f u n d)))  
+;;    ((D E F U N) (F U N D))
+
+(defun find-fun (seq) 
+  (let ((returnList () )) 
+    (if (null seq) returnList
+      (if (search '(F U N) (first seq) ) 
+        (progn (setf returnList (append (find-fun (rest seq)) (list (first seq) ) ) ) returnList) 
+	(progn (setf returnList (find-fun (rest seq))))
+      )
+    ) 
+  ) 
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;8. Conv16: (3p)
 ;;    Write a function conv16 that takes an exploded hexadecimal
@@ -170,17 +217,16 @@
 ;;    by 16, add the second digit,  multiply the result by 16, add the third 
 ;;    digit, and so on. Note that you do not need a calculator to do this problem.
 
-;;(defun conv16 (lst &optional (value 0)) (if (null lst) value 
-;;    (progn (setq value (+ value (getNumber (first lst) ) ) ) (setq value (* value 16)) (conv16 (rest lst) value) ) ) )
-
 ;; Start by mapping the hex non-numerics to their number representation
-(defun getNumber(l) (let ( (numberVal l) (temp (mapcar #'(lambda (x y) (list x y)) '(A B C D E F) '(10 11 12 13 14 15) ) )) 
+(defun getNumber(l) 
+  (let ( (numberVal l) (temp (mapcar #'(lambda (x y) (list x y)) '(A B C D E F) '(10 11 12 13 14 15) ) )) 
   (loop for x in temp do 
     (if (eq (first x) l ) 
       (setq numberVal (nth 1 x)) 
     ) 
   )
-  numberVal ) 
+  numberVal 
+  ) 
 )
 
 (defun conv16 (lst &optional (value 0)) 
