@@ -3,6 +3,9 @@
 
 (defun wrapperFunction ()
   ;; 1a iterative
+  (princ "---- NUMBER 1A ----")
+  (format t "~%")
+
   (iterativeDotGenerator 0)  
   (format t "~%") 
   (iterativeDotGenerator 1)  
@@ -17,6 +20,9 @@
   (format t "-------------------------------------------~%")
 
   ;; 1a recursive
+  (princ "---- NUMBER 1A ----")
+  (format t "~%")
+
   (recursiveDotGenerator 0)  
   (format t "~%") 
   (recursiveDotGenerator 1)  
@@ -31,6 +37,9 @@
   (format t "-------------------------------------------~%")
 
   ;; 1b iterative
+  (princ "---- NUMBER 1B ----")
+  (format t "~%")
+
   (let ((a '(a b c d a)) (b '(a a a a a) ) (c '() )  (d '(k) ) (e '(a b c a a a c b a)))
     (iterativeLetterCount a)
     (format t "~%")
@@ -47,6 +56,9 @@
   (format t "-------------------------------------------~%")
 
     ;; 1b recursive
+    (princ "---- NUMBER 1B ----")
+    (format t "~%")
+
     (let ((a '(a b c a))) 
       (princ (recursiveCountLetter a) ) )
     (format t "~%")
@@ -66,6 +78,9 @@
   (format t "-------------------------------------------~%")
 
   ;; 2a
+  (princ "---- NUMBER 2A ----")
+  (format t "~%")
+
   (princ (summit1 '(1 2 3 4 5))) ;; 15     
   (format t "~%")
   (princ (summit1 '(0))) ;; 0     
@@ -80,6 +95,9 @@
 (format t "-------------------------------------------~%")
 
   ;; 2b
+  (princ "---- NUMBER 2B ----")
+  (format t "~%")
+
   (princ (summit2 '(1 2 3 4 5))) ;; 15     
   (format t "~%")
   (princ (summit2 '(0))) ;; 0     
@@ -95,6 +113,9 @@
   
   ;; number three modifies actual data
   ;; 3a
+  (princ "---- NUMBER 3A ----")
+  (format t "~%")
+
   (princ (pos_rec+ '(1 2 3 4 5))) 
   (format t "~%") 
   (princ (pos_rec+ '(5 4 3 2 1))) 
@@ -109,6 +130,9 @@
   (format t "-------------------------------------------~%")
 
   ;; 3b
+  (princ "---- NUMBER 3B ----")
+  (format t "~%")
+
   (let ((a '(1 2 3 4)))
     (pos+_iterative a)) 
   (format t "~%")
@@ -141,6 +165,9 @@
   (format t "-------------------------------------------~%")
 
   ;; 4
+  (princ "---- NUMBER 4 ----")
+  (format t "~%")
+
   (princ (f 0)) 
   (format t "~%")
   (princ (f 2)) 
@@ -158,7 +185,101 @@
 
   (format t "-------------------------------------------~%")
 
+  ;;5
+  (princ "---- NUMBER 5 ----")
+  (format t "~%")
+
+  (let ((prefix '(S E T)) (dictionary '((S E T Q) (S E T F) (R E V E R S E) (C A T) )) )
+    (princ (lookup prefix dictionary))
+    (format t "~%")
+  )
+
+  (let ((prefix '(D E)) (dictionary '((S E T Q) (D E F U N) (D E M) (S E T F) (D) (R E V E R S E) (C A T) )) )
+    (princ (lookup prefix dictionary))
+    (format t "~%")
+  )
+
+  (let ((prefix '(S)) (dictionary '((S E T Q) (S E T F) (S) (S E A) (R E V E R S E) (C A T) (S E T) (R E A D))) )
+    (princ (lookup prefix dictionary))
+    (format t "~%")
+  )
+
+  (let ((prefix '(S E T)) (dictionary '((R E A D) (S E F) (R E V E R S E) (C A T) )) )
+    (princ (lookup prefix dictionary))
+    (format t "~%")
+  )
+
+  (let ((prefix '(S I M P L E)) (dictionary '((S E T Q) (S E T F) (S I M P L E) (R E V E R S E) (C A T) )) )
+    (princ (lookup prefix dictionary))
+    (format t "~%")
+  )
+
   (format t "-------------------------------------------~%")
+
+  ;; 6
+  (princ "---- NUMBER 6 ----")
+  (format t "~%")
+
+  (princ (occurrences '(a b c a d d)))
+  (format t "~%")
+
+  (princ (occurrences '(a b c a d d a a d e t h c)))
+  (format t "~%")
+
+  (princ (occurrences '()))
+  (format t "~%")
+
+  (princ (occurrences '(d d d d d d d d d)))
+  (format t "~%")
+
+  (princ (occurrences '(a b c a b c a a b a b c)))
+  (format t "~%")
+
+  (format t "-------------------------------------------~%")
+
+  ;; 7
+  (princ "---- NUMBER 7 ----")
+  (format t "~%")
+
+  (princ (find-fun '( (D E F U N) (M O R E F U N) (U P) (F U N))))
+  (format t "~%")
+
+  (princ (find-fun '( () () () ())))
+  (format t "~%")
+
+  (princ (find-fun '( (D E F U N) (M O R E F U N) (U P) (F U N) (D O W N) (FUN) (N O T F U N) )))
+  (format t "~%")
+
+  (princ (find-fun '( (D O W N) (D E F U N) (L E F T) (U P) (R I G H T) (Sometest F U N other text))))
+  (format t "~%")
+
+  (princ (find-fun '( (D E F U N) (F U N) (D E F U N) (F U N) (R U N))))
+  (format t "~%")
+
+  (format t "-------------------------------------------~%")
+
+  ;; 8
+  (princ "---- NUMBER 8 ----")
+  (format t "~%")
+  (princ "7dd = ")
+  (princ (conv16 '(7 d d)))
+  (format t "~%")
+
+  (princ "0 = ")
+  (princ (conv16 '(0)))
+  (format t "~%")
+
+  (princ "f = ")
+  (princ (conv16 '(f)))
+  (format t "~%")
+
+  (princ "7ddf = ")
+  (princ (conv16 '(7 d d f)))
+  (format t "~%")
+
+  (princ "ffffff = ")
+  (princ (conv16 '(f f f f f f)))
+  (format t "~%")
 
   (format t "-------------------------------------------~%")
 )
@@ -168,6 +289,7 @@
 ;;   (a) takes a positive integer and prints that many dots.
 (defun iterativeDotGenerator (x) 
   (loop
+    ;; loop from 1 to the positive integer
     for m from 1 to x
       do (princ ".")
   )
@@ -177,18 +299,23 @@
     (if  (= x 0)
       ;; base case just return 1
       1
-      (progn 
+      (progn
+        ;; reduce the subproblem 
         (recursiveDotGenerator (- x 1))
+        ;; build the answer
         (princ ".") 
       )
     )
   t
 )
 ;; (b) takes a list and returns the number of times the symbol a
-;;       occurs in it.;;    
-(defun iterativeLetterCount (list) 
-  (let ((count 0)) 
-    (loop for sym in list do 
+;;       occurs in it.
+    
+(defun iterativeLetterCount (list)
+  ;; set the counter variable 
+  (let ((count 0))  
+    (loop for sym in list do
+      ;; if the symbol equals a increment the counter 
       (if (eq sym 'a) 
         (setq count (+ count 1) ) 
       ) 
@@ -197,17 +324,14 @@
   ) 
 )
 
-;;(defun recursiveCountLetter (lis) 
-;;  (let ((counter 0)) 
-;;  (if (null lis) 0 
-;;    (if (eq (first lis) 'a) 
-;;      (setq counter (+ 1 (recursiveCountLetter (rest lis)))) 
-;;      (recursiveCountLetter (rest lis))) ) ))
 (defun recursiveCountLetter (lis) 
-  (let ((counter 0)) 
+  (let ((counter 0))
+  ;; base case if list is empty return 0 
   (if (null lis) 0 
     (if (eq (first lis) 'a) 
-      (progn (setq counter (+ 1 (recursiveCountLetter (rest lis)))) counter) 
+      ;; if the symbol is a increment the counter based on the return of the function
+      (progn (setq counter (+ 1 (recursiveCountLetter (rest lis)))) counter)
+      ;; otherwise we don't increment the counter just set and return in. 
       (progn (setq counter (recursiveCountLetter (rest lis))) counter) ) )))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -226,6 +350,7 @@
 ;;       removed from the same list that gets the + operator applied to it
 ;;       The working version is:
 
+;; correct first version
 (defun summit1 (lst) 
   (setq lst (remove nil lst))
     (apply #'+ lst))
@@ -242,6 +367,7 @@
 ;;       doesn't call the summit function again. 
 ;; A corrected version can be seen below:
 
+;; correct second version
 (defun summit2 (lst) 
   (let ((x (car lst))) 
   (progn (if (null lst) 
@@ -260,25 +386,33 @@
 
 ;; (a) recursive
 (defun pos_rec+  (lst &optional (counter 0) ) 
+  ;; if the list is empty we'll just return it
   (if (eq (length lst)  counter) 
     lst  
+    ;; otherwise we will increment the value at index 
+    ;; by it's index
     (progn (setf (nth counter lst) 
-      (+ counter (nth counter lst)) ) 
+      (+ counter (nth counter lst)) )
+        ;; we will call the function on the counter
+        ;; and the rest of the list 
         (pos_rec+ lst (+ counter 1))) ))
 
 ;;(b) iteration
 (defun pos+_iterative (lst) 
   (let ((counter 0)) 
   (loop for x in lst do 
+    ;; increment the value at the index by the counter
     (setf (nth counter lst) (+ x counter)) (setq counter (+ counter 1)))) 
     (princ lst)
 )
 
 ;; (c) mapcar
 (defun pos+_mapcar (lst) 
-  (let ((applist () )) 
+  (let ((applist () ))
+    ;; build a list of the index we want to apply 
     (loop for x from 0 to (length lst) do 
-      (setq applist (append applist (list x)) ))  
+      (setq applist (append applist (list x)) ))
+        ;; use mapcar to add the list to the passed in list  
         (mapcar #'+ lst applist)  ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -291,9 +425,12 @@
 ;;        5
 ;;        >(f 10)
 ;;        10
+
 (let ((max 0)) 
 (defun f (number) 
-  (if (> number max) 
+  (if (> number max)
+    ;; the variable is static it will
+    ;; always be the max accross runs 
     (setq max number)) 
     max
 )
@@ -316,16 +453,21 @@
 
 
 (defun lookup (pre dict) 
-  (let ((returnList () )) 
-  (if (null dict) returnList  
-    (if (equal pre (extractprefix (first dict) (length pre) ) ) 
-      (progn (setf returnList (append (lookup pre (rest dict)) (list (first dict)) ) )  returnList ) 
+  (let ((returnList () ))
+  ;; base case just return the list 
+  (if (null dict) returnList
+    ;; check to see if the prefix matches  
+    (if (equal pre (extractprefix (first dict) (length pre) ) )
+      ;; if the prefix matches return the list plus the appended dictionary value 
+      (progn (setf returnList (append (lookup pre (rest dict)) (list (first dict)) ) )  returnList )
+      ;; otherwise just return the list 
       (progn (setf returnList (lookup pre (rest dict))) returnList) 
     )
   )
   )
 )
- 					      
+
+;; extract the prefix from the exploded characters 					      
 (defun extractPrefix (element length) (let ((pre () )) 
   (loop for x from 0 to (- length 1) do (setq pre (append pre (list (nth x element)))) ) pre))
 
@@ -340,14 +482,22 @@
 ;;    ((A 4) (C 2) (D 2) (B 1))
 (defun occurrences (lst) 
   (let ((count 0) (appList () ))
-    (loop while (not (null lst) ) do 
-      (loop for x in lst do 
-        (if (eql (first lst) x ) 
+    ;; while the list isn't empty
+    (loop while (not (null lst) ) do
+      ;; for each element in the list 
+      (loop for x in lst do
+        ;; if the elements are equal 
+        (if (eql (first lst) x )
+          ;; increment the count 
           (setq count (+ count 1) ) ))
-        (setq appList (append appList (list (list (first lst) count)) ) ) 
+        ;; append the result to the list
+        (setq appList (append appList (list (list (first lst) count)) ) )
+        ;; remove the elements we just counted 
         (setq lst (remove (first lst) lst) ) 
+        ;; reset the count
         (setq count 0)
-    ) 
+    )
+    ;; sort the list based on the number of counts 
     (sort appList #'(lambda (x y) (> (second x) (second y) ) ) )
   )
 )
@@ -362,10 +512,14 @@
 ;;    ((D E F U N) (F U N D))
 
 (defun find-fun (seq) 
-  (let ((returnList () )) 
+  (let ((returnList () ))
+    ;; base case if null just return the list 
     (if (null seq) returnList
-      (if (search '(F U N) (first seq) ) 
-        (progn (setf returnList (append (find-fun (rest seq)) (list (first seq) ) ) ) returnList) 
+      ;; if the first element has F U N in it
+      (if (search '(F U N) (first seq) )
+        ;; if the result contains F U N append append it to the list recursivly 
+        (progn (setf returnList (append (find-fun (rest seq)) (list (first seq) ) ) ) returnList)
+        ;; otherwise just return the list retursivly 
 	(progn (setf returnList (find-fun (rest seq))))
       )
     ) 
@@ -388,9 +542,11 @@
 ;;    digit, and so on. Note that you do not need a calculator to do this problem.
 
 ;; Start by mapping the hex non-numerics to their number representation
-(defun getNumber(l) 
+(defun getNumber(l)
+  ;; map the symbols to numbers 
   (let ( (numberVal l) (temp (mapcar #'(lambda (x y) (list x y)) '(A B C D E F) '(10 11 12 13 14 15) ) )) 
-  (loop for x in temp do 
+  (loop for x in temp do
+    ;; search for the characters number representation and return it. 
     (if (eq (first x) l ) 
       (setq numberVal (nth 1 x)) 
     ) 
@@ -399,9 +555,13 @@
   ) 
 )
 
-(defun conv16 (lst &optional (value 0)) 
+(defun conv16 (lst &optional (value 0))
+  ;; if the list length is equal to one
+  ;; we don't need to multiply by 16 since it's
+  ;; the ones place  
   (if (eq 1 (length lst)) 
-    (+ value (getNumber (nth 0 lst))) 
+    (+ value (getNumber (nth 0 lst)))
+    ;; otherwisewe recurse and convert using the formula
     (progn (setq value (+ value (getNumber (first lst) ) ) ) 
       (setq value (* value 16)) (conv16 (rest lst) value) ) 
   )
