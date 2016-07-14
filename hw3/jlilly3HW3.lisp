@@ -2,9 +2,9 @@
 ;; CS 480 
 ;; 7/14/16
 
- (let ((map '((A (B C E)) (B (A E F)) (C (A E F)) (D (F)) (E (A B C F)) (F (B C D E))) )
+ (defvar *map* '((A (B C E)) (B (A E F)) (C (A E F)) (D (F)) (E (A B C F)) (F (B C D E))) )
 
- (australia '( (WA (NT SA)) (NT (WA SA Q)) (SA (WA NT Q SW V)) (Q (NT SA SW)) (SW (SA Q V)) (V (SA SW)) (TS  () ) )))
+ (defvar *australia* '( (WA (NT SA)) (NT (WA SA Q)) (SA (WA NT Q SW V)) (Q (NT SA SW)) (SW (SA Q V)) (V (SA SW)) (TS  () ) ))
 
 
 ;; generates all possible permutations of length len over an 
@@ -102,4 +102,4 @@
     )
   )
 )
-)
+
