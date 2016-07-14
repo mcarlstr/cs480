@@ -1,0 +1,43 @@
+Script started on Thu 14 Jul 2016 04:12:44 PM PDT
+]0;bellum@ubuntu: ~/cs480/hw3bellum@ubuntu:~/cs480/hw3$ sbcl
+This is SBCL 1.1.14.debian, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+* (load "jlilly3HW3.lisp")
+
+T
+* (color-map *australia*)
+Colored the map with 3 colors
+(((WA R) (NT G) (SA B) (Q R) (SW G) (V R) (TS R))
+ ((WA R) (NT G) (SA B) (Q R) (SW G) (V R) (TS G))
+ ((WA R) (NT G) (SA B) (Q R) (SW G) (V R) (TS B))
+ ((WA R) (NT B) (SA G) (Q R) (SW B) (V R) (TS R))
+ ((WA R) (NT B) (SA G) (Q R) (SW B) (V R) (TS G))
+ ((WA R) (NT B) (SA G) (Q R) (SW B) (V R) (TS B))
+ ((WA G) (NT R) (SA B) (Q G) (SW R) (V G) (TS R))
+ ((WA G) (NT R) (SA B) (Q G) (SW R) (V G) (TS G))
+ ((WA G) (NT R) (SA B) (Q G) (SW R) (V G) (TS B))
+ ((WA G) (NT B) (SA R) (Q G) (SW B) (V G) (TS R))
+ ((WA G) (NT B) (SA R) (Q G) (SW B) (V G) (TS G))
+ ((WA G) (NT B) (SA R) (Q G) (SW B) (V G) (TS B))
+ ((WA B) (NT R) (SA G) (Q B) (SW R) (V B) (TS R))
+ ((WA B) (NT R) (SA G) (Q B) (SW R) (V B) (TS G))
+ ((WA B) (NT R) (SA G) (Q B) (SW R) (V B) (TS B))
+ ((WA B) (NT G) (SA R) (Q B) (SW G) (V B) (TS R))
+ ((WA B) (NT G) (SA R) (Q B) (SW G) (V B) (TS G))
+ ((WA B) (NT G) (SA R) (Q B) (SW G) (V B) (TS B)))
+* (color-map *map*)
+Colored the map with 3 colors
+(((A R) (B G) (C G) (D G) (E B) (F R)) ((A R) (B G) (C G) (D B) (E B) (F R))
+ ((A R) (B B) (C B) (D G) (E G) (F R)) ((A R) (B B) (C B) (D B) (E G) (F R))
+ ((A G) (B R) (C R) (D R) (E B) (F G)) ((A G) (B R) (C R) (D B) (E B) (F G))
+ ((A G) (B B) (C B) (D R) (E R) (F G)) ((A G) (B B) (C B) (D B) (E R) (F G))
+ ((A B) (B R) (C R) (D R) (E G) (F B)) ((A B) (B R) (C R) (D G) (E G) (F B))
+ ((A B) (B G) (C G) (D R) (E R) (F B)) ((A B) (B G) (C G) (D G) (E R) (F B)))
+* (quit)
+]0;bellum@ubuntu: ~/cs480/hw3bellum@ubuntu:~/cs480/hw3$ 
+Script done on Thu 14 Jul 2016 04:13:44 PM PDT
