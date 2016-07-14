@@ -26,7 +26,6 @@
 )
 
 (defun do-remove (permutations indexList currentIndex)
-  (break)
   (loop for x in permutations do
     (loop for y in indexList do
       (if (eq (nth currentIndex x) (nth y x))
@@ -35,13 +34,12 @@
       )
     )
   )
-  (format t "--------------------------------------------------------------------------~%")
   permutations
   ;;(princ permutations)
 )
 
 (defun remove-illigal-permutations (permutations assocList)
-  (let ((countryMap ()) (associations ()) (temp ()) )
+  (let ((countryMap ()) (associations ()) (temp ()) (retList ()) )
     (setq countryMap (mapcar #'(lambda(x)(first x) ) assocList)) ;; The index is it's position in the permutation
     (loop for x in assocList do
       (setq temp (second x))
@@ -49,13 +47,18 @@
         ;; associations will have the indicies to check 
         (setq associations (append associations (list (position y countryMap :test #'equal))))
       )
-      (break)
       ;; check the permutations and do the removal
       (setf permutations (do-remove permutations associations (position (first x) countryMap :test #'equal )))
       (setq associations ())
     )
+    (setq temp ())
+    (loop for x in permutations do
+      (setf temp (mapcar #'(lambda (x y) (list x y) ) countryMap x ))
+      (setf retList (append retList (list temp)))
+      (setf temp ())
+    )
+    retList
   )
-  permutations
 )
 
 (defun find-colors (assocList colorList)
@@ -65,3 +68,7 @@
     permutations
   ) 
 )
+
+;;((R G G G B R) (R G G B B R) (R B B G G R) (R B B B G R) (G R R R B G)
+;; (G R R B B G) (G B B R R G) (G B B B R G) (B R R R G B) (B R R G G B)
+;; (B G G R R B) (B G G G R B))
