@@ -63,7 +63,6 @@
   )
 )
 
-;; TODO implement weights
 (defun MGA (countryList) 
   (let ((F () ) (i 1) (Gi () ) (largest () ) )
     (setq Gi (remove-zero-one countryList))
@@ -75,12 +74,19 @@
       (setq F (append F largest))
       (setq countryList (remove largest countryList))
       (+ i 1)
-      ;; merge the two list together since the call to
-      ;; remove-zero-one will most likely return a list
-      ;; where some of the elements are already in G1
-
-      ;; TODO
+      ;; G1 at this point should be === to countryList \ all verticies
+      ;; with 0 or one as their degree and without the largest
+      ;; node we just found in this iteration. Since the difference
+      ;; between country list is such. We should be able to run the
+      ;; remove-zero-one algorithm on the countryList graph and receive
+      ;; a new G1 which is equivalent to countryList without any nodes with
+      ;; degree 0 or 1 (without the node we extracted in this iteration) and
+      ;; that should be what we want... I think... that still needs to be tested
+      (setq Gi (remove-zero-one countryList))
     )
+    ;; just return the cut set we can just remove these nodes from the graph
+    ;; to obtain the tree.
+    F
   )
 )
 
