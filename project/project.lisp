@@ -1,7 +1,15 @@
 
-(defvar *australia* '( (WA (NT SA)) (NT (WA SA Q)) (SA (WA NT Q SW V)) (Q (NT SA SW)) (SW (SA Q V)) (V (SA SW)) (TS  () ) ))
+;; Maybe we can add the weights to the association list like this.
+;; so I am going to write code assuming weights are represented like this.
+(defvar *australia* '( (WA ((NT 1) (SA 1))) (NT ((WA 1) (SA 1) (Q 1) )) 
+  (SA ((WA 1) (NT 1) (Q 1) (SW 1) (V 1))) (Q ((NT 1) (SA 1) (SW 1))) (SW ((SA 1) (Q 1) (V 1))) (V ((SA 1) (SW 1))) (TS  () ) ))
 
 ;; mutate the list so the elements with degree 0 or 1 are removed. 
+
+;; corrisponds to repeatedly remove all verticies with deg 0 
+;; or 1 from V and their adjacent edges from E and insert the
+;; resulting graph into Gi
+
 (defun remove-zero-one (list)
   (let ((sym1 () ) (sym2 () ) (temp () ) )
     (loop for x in list do
@@ -43,9 +51,36 @@
   list  
 )
 
+(defun find-largest-degree (lst)
+  (let ( (i 0) (largest () ) )
+    (loop while (< i (length lst)) do
+      (if (> (length (second (nth i lst))) (length (second largest)))
+        (setq largest (nth i lst)) 
+      )
+      (setq i (+ 1 i))
+    )
+    largest
+  )
+)
+
+;; TODO implement weights
 (defun MGA (countryList) 
-  (let ((F ()) (i 1) )
-   
+  (let ((F () ) (i 1) (Gi () ) (largest () ) )
+    (setq Gi (remove-zero-one countryList))
+    (loop while (not (null Gi)) do
+      ;; At this point in the algorithm weight is going to
+      ;; always be 1 so the smallest weight to degree ration
+      ;; will be the node with the largest degree.
+      (setq largest (find-largest-degree countryList))
+      (setq F (append F largest))
+      (setq countryList (remove largest countryList))
+      (+ i 1)
+      ;; merge the two list together since the call to
+      ;; remove-zero-one will most likely return a list
+      ;; where some of the elements are already in G1
+
+      ;; TODO
+    )
   )
 )
 
