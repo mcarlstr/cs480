@@ -1,6 +1,4 @@
 
-;; Maybe we can add the weights to the association list like this.
-;; so I am going to write code assuming weights are represented like this.
 (defvar *australia* '( (WA (NT SA)) 
                        (NT (WA SA Q )) 
                        (SA (WA NT Q SW V)) 
@@ -8,6 +6,59 @@
                        (SW (SA Q V)) 
                        (V (SA SW)) 
                        (TS  () ) ))
+
+(defvar *50-states* '(
+                    (AL (GA FL MS TN))             ; AL = Alabama
+                    (AK ())                        ; AK = Alaska
+                    (AZ (CA NV UT CO NM))          ; AZ = Arizona
+                    (AR (TX OK MO TN MS LA))       ; AR = Arkansas
+                    (CA (OR NV AZ))                ; CA = California
+                    (CO (NM AZ UT WY NE KS OK))    ; CO = Colorado
+                    (CT (RI NY MA))                ; CT = Conneticut
+                    (DE (MD PA NJ))                ; DE = Delaware
+                    (DC (MD VA))                   ; DC = D.C.
+                    (FL (GA AL))                   ; FL = Florida
+                    (GA (SC NC TN AL FL))          ; GA = Georgia
+                    (HI ())                        ; HI = Hawaii
+                    (ID (WA OR NV UT WY MT))       ; ID = Idaho
+                    (IL (WI IA MO KY IN))          ; IL = Illinois
+                    (IN (IL KY OH MI))             ; IN = Indiana
+                    (IA (MN SD NE MO IL WI))       ; IA = Iowa
+                    (KS (CO OK MO NE))             ; KS = Kansas
+                    (KY (MO TN VA WV OH IN IL))    ; KY = Kentucky
+                    (LA (TX AR MS))                ; LA = Lousiana
+                    (ME (NH))                      ; ME = Maine
+                    (MD (DE PA WV DC VA))          ; MD = Maryland
+                    (MA (RI CT NY VT NH))          ; MA = Mass
+                    (MI (OH IN WI))                ; MI = Michigan
+                    (MN (WI IA SD ND))             ; MN = Minnesota
+                    (MS (LA AR TN AL))             ; MS = Mississippi
+                    (MO (KS NE IA IL KY TN AR OK)) ; MO = Missouri
+                    (MT (ID WY SD ND))             ; MT = Montana
+                    (NE (WY SD IA MO KS CO))       ; NE = Nebraska
+                    (NV (CA OR ID UT AZ))          ; NV = Nevada
+                    (NH (ME MA VT))                ; NH = New Hampshire
+                    (NJ (NY PA DE))                ; NJ = New Jersey
+                    (NM (AZ UT CO OK TX))          ; NM = New Mexico
+                    (NY (PA NJ CT MA VT))          ; NY = New York
+                    (NC (VA TN GA SC))             ; NC = North Carolina
+                    (ND (MT SD MN))                ; ND = North Dakota
+                    (OH (PA WV KY IN MI))          ; OH = Ohio
+                    (OK (TX NM CO KS MO AR))       ; OK = Oklahoma
+                    (OR (WA ID NV CA))             ; OR = Oregon
+                    (PA (NY NJ DE MD WV OH))       ; PA = Pennsylvania
+                    (RI (CT MA))                   ; RI = Rhode Island
+                    (SC (GA NC))                   ; SC = South Carolina
+                    (SD (WY MT ND MN IA NE))       ; SD = South Dakota
+                    (TN (AR MO KY VA NC GA AL MS)) ; TN = Tennessee
+                    (TX (NM OK AR LA))             ; TX = Texas
+                    (UT (CO NM AZ NV ID WY))       ; UT = Utah
+                    (VT (NY MA NH))                ; VT = Vermont
+                    (VA (NC TN KY WV MD DC))       ; VA = Virginia
+                    (WA (ID OR))                   ; WA = Washington
+                    (WV (KY OH PA MD VA))          ; WV = West Virginia
+                    (WI (MN IA  IL MI))            ; WI = Wisconsin
+                    (WY (ID MT SD NE CO UT))))     ; WY = Wyoming
 
 (defun remove-zero-one (list)
 
@@ -41,18 +92,10 @@
         ;; store the symbol in the association list
         ;; that we need to find and delete.
         (setq sym1 x)
-;;        (format t "********* x is ")
-;;        (princ x)
-;;        (format t "~%") 
-;;        (break)
         ;; find the list that contains a reference to
         ;; the element we are about to delete and remove 
         ;; the element we are deleting from that elements list.
         (loop for y in map do
-;;       (format t "********* y is ")
-;;        (princ y)
-;;        (format t "~%") 
-;;        (break)
           (if (eq (first y) sym1)        
             ;; this is the list with the edge we want to remove
             ;; which means the second element of y is the list which
@@ -66,7 +109,6 @@
                   (princ y)
                   (format t "~%") 
  
-                  ;; this setf screws up the countryList... *BUG*
                   (setf (second y) (remove z (second y)))
                 )              
               )
@@ -110,36 +152,28 @@
   (let ((F () ) (Gi () ) (largest () ) (copy ()) )
     ;; make a deep copy for the functions to mutate
     ;; since we don't want to destry the origional just yet
- ;;   (setf copy (copy countryList))
- ;;   (setf (second copy) (copy-alist (second countryList)))
+    (setf copy (copy countryList))
 
-    (setf countryList (remove-zero-one countryList))
-    (princ countryList)
-    (break)
-    ;;(setq Gi (remove-zero-one countryList))
-     (setq Gi countryList)
+    (setf copy (remove-zero-one copy))
+    (setq Gi copy)
     (loop while (not (null Gi)) do
       ;; At this point in the algorithm weight is going to
       ;; always be 1 so the smallest weight to degree ration
-      ;; will be the node with the largest degree.
-     ;; (setq largest (find-largest-degree countryList))
-      (setq largest (last countryList))
+      ;; will be the node with the largest degree. Which is at
+      ;; the end of the list
+      (setq largest (last copy))
 
       (format t "Removing ")
       (princ largest)
       (format t "~%")
        
       (setq F (append F  largest))
-;      (break)
       (format t "The cutset is now ")
       (princ F)
       (format t "~%")
 
-  ;;    (setf countryList (delete largest countryList :test #'equal))
-      (setf countryList (delete (first (last countryList)) countryList))
-      (princ countryList)
-      (break)
-      (remove-from-neighbors countryList (second (first largest)) (first (first largest)))
+      (setf copy (delete (first (last copy)) copy))
+      (remove-from-neighbors copy (second (first largest)) (first (first largest)))
 
       ;; G1 at this point should be === to countryList \ all verticies
       ;; with 0 or one as their degree and without the largest
@@ -149,25 +183,19 @@
       ;; a new G1 which is equivalent to countryList without any nodes with
       ;; degree 0 or 1 (without the node we extracted in this iteration) and
       ;; that should be what we want... I think... that still needs to be tested
-      (setf countryList (remove-zero-one countryList))
-      ;;(setq Gi (remove-zero-one countryList))
-      (setq Gi countryList)
-      (format t "Gi is ")
-      (princ Gi)
-      (format t "~%")
+      (setf copy (remove-zero-one copy))
+      (setq Gi copy)
     )
-
-    ;;make tree
-;;    (loop for m in F do
-;;      (princ m)
-;;      (break)
-;;      (remove-from-neighbors countryList (second m) (first m))
-;;      (setf countryList (delete m countryList :test #'equal))
-;;    ) 
-;;    (princ countryList)   
-    ;; return the cut set the list passed in
-    ;; is now the tree portion.
+    ;; return the cut set
     F
   )
 )
 
+;; makes the tree portion on the list
+(defun get-tree (countryList minCut)
+  ;;make tree
+  (loop for m in minCut do
+    (setf countryList (delete m countryList :test #'equal))
+    (remove-from-neighbors countryList (second minCut) (first minCut))
+  )   
+)
