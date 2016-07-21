@@ -208,10 +208,10 @@
 ;;; Just doing this to make it easier to note and so that I don't mess up any
 ;;; other code.
 
+
 ;;; Takes generated cutset and creates an assoc list by referencing
 ;;; original assoc-list.  This new assoc list is self-contained, the only edges 
 ;;; included are ones which connect to other vertices in the cutset.
-
 (defun gen-cutset-assoc (cutset assoc-list)
   (let ((cutset-assoc))
     (dolist (current cutset)
@@ -221,9 +221,9 @@
 
     ;; scrub new assoc-list, removing edges to vertices outside of cutset
     (dolist (current cutset-assoc)
-      (dolist (x (first(rest current)))
+      (dolist (x (cadr current))
         (if (not (member x cutset))
-          (setf (first(rest current)) (remove x (first(rest current))))
+          (setf (cadr current) (remove x (cadr current)))
         )
       )
     )
@@ -239,7 +239,6 @@
 
 
 ;;; helper, sort alphabetically by vertex name in assoc-list
-
 (defun alp-sort (x y)
   (string-lessp (car x) (car y))
 )
@@ -259,7 +258,6 @@
 ;;; argument is just nil)
 ;;;
 ;;; Returns list of cons pairs of (VERTEX . COLOR), sorted by VERTEX
-
 (defun color-greedy (assoc-list color-list coloring)
   (let ((color-assignment)
       (sorted-list))
@@ -342,7 +340,6 @@
 ;;; Returns a list of cons pairs indicating color assignments in 
 ;;; alphabetical order according to vertex name
 ;;; Example output: ((AK R) (CA B) (MD R) (NM G) (WY B))
-
 (defun color-map (assoc-list color-list)
   (let ((cutset-assoc)
       (cutset-coloring)
@@ -360,7 +357,6 @@
 
 
 ;;; Function just to show an example run
-
 (defmacro pr (form)
   `(format t "~%~a~%~%~a~%" ',form ,form)
 )
