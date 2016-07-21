@@ -336,9 +336,8 @@
 
 
 ;;; Wrapper function to handle coloring of map in several steps.
-;;; Requires the original assoc-list, the cutset of just vertices, and the color
-;;; list.
-;;; Example function call: (color-map *50-states* '(AK HI ME CO) '(R G B Y))
+;;; Requires the original assoc-list and the color list.
+;;; Example function call: (color-map *50-states* '(R G B Y))
 ;;;
 ;;; Returns a list of cons pairs indicating color assignments in 
 ;;; alphabetical order according to vertex name
